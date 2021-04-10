@@ -2,113 +2,35 @@
 #include <stdlib.h>
 #include <fstream>
 #include <string>
+#include "funzioni.hpp"
 #define DIM 3
  using namespace std;
 
-struct squadra{
-    string nome;
-    int punti;
-    string capocannoniere_nome;
-    int capocannoniere_gol;
-}squadre[DIM];
-void inserimento()
-{
+    /*! \mainpage <CENTER> esercizio tpsit </CENTER>
+    * \author <B> Nicole Tozzi </B>
+    * \version <B> V1.0 </B>
+    * \date <B> Consegna progetto:    </B>
+    *
+    * \section caratteristiche CARATTERISTICHE DEL PROGETTO
+    *
+    *  Il software permette di:
+    * - fa l'input delle squadre
+    * - Stampa la classifica dei punti
+    * - Stampa la classifica dei marcatori
+    *
+    *\section UML DIAGRAMMA UML DEL PROGETTO
+    * <IMG SRC = "uml.jpg" ALT = "Diagramma UML del progetto"/>
+    *
+    *\section CLASS DIAGRAMMA DELLE CLASSI PRESENTI NEL PROGETTO
+    *<IMG SRC = "classi.jpg" ALT = "Diagramma delle classi del progetto"/>
+    */
 
-    ofstream file("MioFile.dat",ios::out|ios::binary);
-    if(!file)
-        cout<<"errore apertura file ";
-    else
-    {
-        string temp;
-        for(int i=0;i<DIM;i++)
-        {
-            cout<<"Inserimento della squadra numero"<<(i+1)<<endl;
-            cout<<"Nome squadra:";
-            fflush(stdin);
-            getline(cin,temp);
-            squadre[i].nome=temp;
-            cout<<endl;
-            cout<<"Punti squadra:";
-            cin>>squadre[i].punti;
-            cout<<endl;
-            cout<<"Capocannoniere squadra:";
-            fflush(stdin);
-            getline(cin,temp);
-            squadre[i].capocannoniere_nome=temp;
-            cout<<endl;
-            cout<<"Gol capocannoniere:";
-            cin>>squadre[i].capocannoniere_gol;
-            file.write((char *)&squadre[i],sizeof(squadre[i]));
-        }
-        for(int c=0; c<DIM; c++)
-          {
-             cout<<"Nome squadra: "<<squadre[c].nome<<" Punti: "<<squadre[c].punti<<" Nome capocannoniere:  "<<squadre[c].capocannoniere_nome<<" Gol: "<<squadre[c].capocannoniere_gol<<endl;
 
-          }
-    }
-}
-void classifica()
-{
-    squadra app;
-    ifstream file("MioFile.dat",ios::in|ios::binary);
-    if(!file)
-        cout<<"errore apertura file";
-    else
-    {
-        for(int i=0;i<DIM;i++)
-            file.read((char *)&squadre[i],sizeof(squadre[i]));
 
-        for(int i=0;i<DIM;i++)
-        {
-            for(int j=i+1;j<DIM;j++)
-            {
-               if(squadre[i].punti<squadre[j].punti)
-                {
-                    app=squadre[j];
-                    squadre[j]=squadre[i];
-                    squadre[i]=app;
-                }
 
-            }
-        }
-    }
-     for(int c=0; c<DIM; c++)
-          {
-             cout<<"Nome squadra: "<<squadre[c].nome<<" Punti: "<<squadre[c].punti<<endl;
-
-          }
-}
- void marcatori()
-{
- squadra app;
-    ifstream file("MioFile.dat",ios::in|ios::binary);
-    if(!file)
-        cout<<"errore apertura file";
-    else
-    {
-        for(int i=0;i<DIM;i++)
-            file.read((char *)&squadre[i],sizeof(squadre[i]));
-        for(int i=0;i<DIM;i++)
-        {
-            for(int j=i+1;j<DIM;j++)
-            {
-                 if(squadre[i].capocannoniere_gol<squadre[j].capocannoniere_gol)
-                {
-                    app=squadre[j];
-                    squadre[j]=squadre[i];
-                    squadre[i]=app;
-                }
-            }
-        }
-    }
-     for(int c=0; c<DIM; c++)
-          {
-             cout<<"Nome squadra: "<<squadre[c].nome<<" Nome capocannoniere:  "<<squadre[c].capocannoniere_nome<<" Gol: "<<squadre[c].capocannoniere_gol<<endl;
-
-          }
-}
  int main()
 {
+     //! \brief main nel quale tutto accade
     int scelta;
     do
     {
